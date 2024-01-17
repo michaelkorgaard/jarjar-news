@@ -1,0 +1,29 @@
+.comment {
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  padding: 24px;
+  display: flex;
+
+  &__content {
+    flex: 1;
+    margin-left: 24px;
+  }
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  &__createdBy {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  &__text {
+    line-height: 22px;
+  }
+}

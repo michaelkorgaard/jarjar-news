@@ -1,0 +1,76 @@
+.newsCard {
+  overflow: hidden;
+  border-radius: 10px;
+  background-color: #fff;
+  border: 1px solid #eee;
+  position: relative;
+  transition: 300ms all ease-in-out;
+  color: var(--ui-text);
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+    .news-card__image {
+      transform: scale(1.1);
+    }
+  }
+  &__imageWrapper {
+    height: 220px;
+    overflow: hidden;
+  }
+  &__image {
+    height: 100%;
+    object-fit: contain;
+    transition: 300ms all ease-in-out;
+  }
+  &__inner {
+    padding: 24px 24px 74px;
+  }
+  &__title {
+    margin-bottom: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  &__text {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 24px;
+    line-height: 22px;
+  }
+  &__created {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+  }
+  &__createdBy {
+    font-weight: bold;
+    color: #333;
+    margin-left: 12px;
+  }
+  &__createdDate {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    border-bottom-left-radius: 10px;
+  }
+  &__delete {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-bottom-right-radius: 10px;
+    padding: 5px;
+    font-size: 20px;
+  }
+}

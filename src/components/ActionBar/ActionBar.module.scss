@@ -1,0 +1,41 @@
+.actionBar {
+  overflow: hidden;
+  border-radius: 10px;
+  background-color: #fff;
+  border: 1px solid #eee;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 24px;
+  margin-bottom: 24px;
+  &__left {
+    display: flex;
+    margin-right: 50px;
+  }
+  &__right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    flex: 1;
+  }
+
+  &__reply {
+    border: none;
+    color: var(--off-primary);
+    background-color: transparent;
+    padding: 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    svg {
+      font-size: 24px;
+      margin-right: 10px;
+    }
+  }
+}

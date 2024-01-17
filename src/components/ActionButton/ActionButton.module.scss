@@ -1,0 +1,18 @@
+.actionButton {
+  border: none;
+  color: var(--off-primary);
+  background-color: transparent;
+  padding: 12px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  svg {
+    font-size: 24px;
+    margin-right: 10px;
+  }
+}
