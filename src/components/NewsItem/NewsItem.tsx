@@ -1,24 +1,23 @@
 import { useParams } from "react-router-dom";
 import styles from "./Newsitem.module.scss";
-import { NewsInterface, CommentInterface } from "../../assets/data/data.tsx";
 import Comment from "../Comment/Comment.tsx";
 import Avatar from "../Avatar/Avatar.tsx";
 import ActionBar from "../ActionBar/ActionBar.tsx";
 import Dates from "../Dates/Dates.tsx";
-// import { useEffect, useState } from "react";
+import { CommentType } from "../../types/CommentType.tsx";
+import { useNewsContext } from "../../context/NewsContext.tsx";
 
 type Props = {
-  newsArray: NewsInterface[];
   onCreateComment: (
-    updatedList: CommentInterface,
+    updatedList: CommentType,
     newsId: string | undefined
   ) => void;
 };
 
-function NewsItem({ newsArray, onCreateComment }: Props) {
+function NewsItem({ onCreateComment }: Props) {
   let { id } = useParams();
-
-  const selectedNewsItem = newsArray.find((newsItem) => newsItem.id === id);
+  const { news } = useNewsContext();
+  const selectedNewsItem = news.find((newsItem) => newsItem.id === id);
 
   // const [selectedNewsItem, setSelectedNewsItem] = useState(
   //   newsArray.find((newsItem) => newsItem.id === id)
@@ -75,7 +74,7 @@ function NewsItem({ newsArray, onCreateComment }: Props) {
         <div className={styles.newsItem__comments}>Comments:</div>
       )}
 
-      {selectedNewsItem?.comments?.map((comment: CommentInterface) => (
+      {selectedNewsItem?.comments?.map((comment: CommentType) => (
         <Comment key={comment.id} {...comment} />
       ))}
     </>

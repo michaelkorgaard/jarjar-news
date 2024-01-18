@@ -1,20 +1,22 @@
-import { NewsInterface } from "../../assets/data/data.tsx";
 import { Link } from "react-router-dom";
 import styles from "./NewsCard.module.scss";
 import Avatar from "../Avatar/Avatar.tsx";
 import Dates from "../Dates/Dates.tsx";
 import { MdDelete } from "react-icons/md";
+import { NewsType } from "../../types/NewsType.tsx";
+import { useNewsContext } from "../../context/NewsContext";
 
 type Props = {
-  newsItem: NewsInterface;
-  onDeleteNewsItem: (deletedNewsItem: string) => void;
+  newsItem: NewsType;
 };
 
-function NewsCard({ newsItem, onDeleteNewsItem }: Props) {
-  const deleteNewsItem = (event: any) => {
-    onDeleteNewsItem(newsItem.id);
-    event.stopPropagation();
-  };
+function NewsCard({ newsItem }: Props) {
+  const { news, setNews } = useNewsContext();
+
+  function deleteNewsItem() {
+    const newNewsArray = news.filter((elm) => elm.id !== newsItem.id);
+    setNews(newNewsArray);
+  }
 
   return (
     <>

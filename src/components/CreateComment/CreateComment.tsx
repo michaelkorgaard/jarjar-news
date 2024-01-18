@@ -3,12 +3,12 @@ import styles from "./CreateComment.module.scss";
 import { FaReply } from "react-icons/fa";
 import jarjarImage from "../../assets/images/jarjar.png";
 import { v4 as uuid } from "uuid";
-import { CommentInterface } from "../../assets/data/data";
+import { CommentType } from "../../types/CommentType";
 
 type Props = {
   newsId: string | undefined;
   onCreateComment: (
-    updatedList: CommentInterface,
+    updatedList: CommentType,
     newsId: string | undefined
   ) => void;
 };
@@ -20,7 +20,7 @@ function CreateComment({ newsId, onCreateComment }: Props) {
   const createdDate = new Date();
 
   function reply() {
-    let comment: CommentInterface = {
+    let comment: CommentType = {
       id: uuid(),
       text: text.current?.value,
       createdBy: createdBy,

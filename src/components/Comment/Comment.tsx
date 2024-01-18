@@ -1,14 +1,9 @@
-import { CommentInterface } from "../../assets/data/data.tsx";
 import styles from "./Comment.module.scss";
 import Avatar from "../Avatar/Avatar.tsx";
 import Dates from "../Dates/Dates.tsx";
+import { CommentType } from "../../types/CommentType.tsx";
 
-function Comment({
-  text,
-  createdBy,
-  createdImage,
-  createdDate,
-}: CommentInterface) {
+function Comment({ text, createdBy, createdImage, createdDate }: CommentType) {
   return (
     <>
       <div className={styles.comment}>

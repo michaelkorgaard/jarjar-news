@@ -1,13 +1,15 @@
 import { createContext, useContext } from "react";
+import { NewsType } from "../types/NewsType";
+import { data } from "../assets/data/data";
 
-export type SidebarContent = {
-  sidebarState: boolean;
-  setSidebarState: (value: boolean) => void;
+export type News = {
+  news: NewsType[];
+  setNews: (news: NewsType[]) => void;
 };
 
-export const SidebarContext = createContext<SidebarContent>({
-  sidebarState: false,
-  setSidebarState: () => {},
+export const NewsContext = createContext<News>({
+  news: data,
+  setNews: () => {},
 });
 
-export const useGlobalContext = () => useContext(SidebarContext);
+export const useNewsContext = () => useContext(NewsContext);

@@ -4,12 +4,12 @@ import styles from "./ActionBar.module.scss";
 import { FaReply } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
 import CreateComment from "../CreateComment/CreateComment";
-import { CommentInterface } from "../../assets/data/data";
+import { CommentType } from "../../types/CommentType";
 
 type Props = {
   newsId: string | undefined;
   onCreateComment: (
-    updatedList: CommentInterface,
+    updatedList: CommentType,
     newsId: string | undefined
   ) => void;
 };

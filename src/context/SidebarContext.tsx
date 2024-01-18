@@ -10,4 +10,4 @@ export const SidebarContext = createContext<SidebarContent>({
   setSidebarState: () => {},
 });
 
-export const useGlobalContext = () => useContext(SidebarContext);
+export const useSidebarContext = () => useContext(SidebarContext);

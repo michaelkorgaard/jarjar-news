@@ -3,17 +3,16 @@ import styles from "./CreateNews.module.scss";
 import { IoClose } from "react-icons/io5";
 import { FaPlusCircle } from "react-icons/fa";
 import Dates from "../Dates/Dates";
-import { NewsInterface } from "../../assets/data/data.tsx";
 import { v4 as uuid } from "uuid";
 import jarjarImage from "../../assets/images/jarjar.png";
-import { useGlobalContext } from "../../context/SidebarContext";
+import { useSidebarContext } from "../../context/SidebarContext";
+import { NewsType } from "../../types/NewsType";
+import { useNewsContext } from "../../context/NewsContext";
 
-type Props = {
-  onCreateNewsItem: (updatedList: NewsInterface) => void;
-};
+function CreateNews() {
+  const { sidebarState, setSidebarState } = useSidebarContext();
 
-function CreateNews({ onCreateNewsItem }: Props) {
-  const { sidebarState, setSidebarState } = useGlobalContext();
+  const { news, setNews } = useNewsContext();
 
   function toggleCreateNews() {
     setSidebarState(!sidebarState);
@@ -27,7 +26,7 @@ function CreateNews({ onCreateNewsItem }: Props) {
   const createdDate = new Date();
 
   function createNews() {
-    let newsItem: NewsInterface = {
+    let newsItem: NewsType = {
       id: uuid(),
       image: image,
       title: title.current?.value,
@@ -37,7 +36,8 @@ function CreateNews({ onCreateNewsItem }: Props) {
       createdDate: createdDate,
     };
 
-    onCreateNewsItem(newsItem);
+    const newNewsArray = [...news, newsItem];
+    setNews(newNewsArray);
   }
 
   return (

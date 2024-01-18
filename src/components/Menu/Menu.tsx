@@ -1,9 +1,9 @@
 import { FaCirclePlus } from "react-icons/fa6";
 import styles from "./Menu.module.scss";
-import { useGlobalContext } from "../../context/SidebarContext";
+import { useSidebarContext } from "../../context/SidebarContext";
 
 function Menu() {
-  const { sidebarState, setSidebarState } = useGlobalContext();
+  const { sidebarState, setSidebarState } = useSidebarContext();
 
   function updateValue() {
     setSidebarState(!sidebarState);
