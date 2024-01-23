@@ -2,7 +2,7 @@ import { FaCirclePlus } from "react-icons/fa6";
 import styles from "./Menu.module.scss";
 import { useSidebarContext } from "../../context/SidebarContext";
 
-function Menu() {
+export function Menu() {
   const { sidebarState, setSidebarState } = useSidebarContext();
 
   function updateValue() {
@@ -22,5 +22,3 @@ function Menu() {
     </>
   );
 }
-
-export default Menu;

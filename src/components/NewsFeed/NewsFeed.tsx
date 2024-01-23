@@ -1,10 +1,9 @@
 import { NewsType } from "../../types/NewsType.tsx";
-import CreateNews from "../CreateNews/CreateNews.tsx";
-import NewsCard from "../NewsCard/NewsCard.tsx";
+import { NewsCard } from "../NewsCard/NewsCard.tsx";
 import styles from "./NewsFeed.module.scss";
 import { useNewsContext } from "../../context/NewsContext";
 
-function NewsFeed() {
+export function NewsFeed() {
   const { news } = useNewsContext();
 
   return (
@@ -17,5 +16,3 @@ function NewsFeed() {
     </>
   );
 }
-
-export default NewsFeed;

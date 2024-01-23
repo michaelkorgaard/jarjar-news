@@ -7,12 +7,12 @@ import { NewsContext } from "./context/NewsContext.tsx";
 import { SidebarContentProvider } from "./context/SidebarContext.tsx";
 
 // Components
-import Header from "./components/Header/Header";
-import NewsItem from "./components/NewsItem/NewsItem";
-import NewsFeed from "./components/NewsFeed/NewsFeed";
+import { Header } from "./components/Header/Header";
+import { NewsItem } from "./components/NewsItem/NewsItem";
+import { NewsFeed } from "./components/NewsFeed/NewsFeed";
 import { CreateNews } from "./components/CreateNews/CreateNews.tsx";
 
-function App() {
+export function App() {
   const [sidebarState, setSidebarState] = useState<boolean>(false);
   const [news, setNews] = useState(data);
 
@@ -21,7 +21,6 @@ function App() {
       <NewsContext.Provider value={{ news, setNews }}>
         <SidebarContentProvider value={{ sidebarState, setSidebarState }}>
           <CreateNews />
-
           <Header />
           <div className="wrapper">
             <Routes>
@@ -34,5 +33,3 @@ function App() {
     </>
   );
 }
-
-export default App;

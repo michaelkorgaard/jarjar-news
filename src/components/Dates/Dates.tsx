@@ -4,7 +4,7 @@ import { MdOutlineDateRange } from "react-icons/md";
 
 type Props = { date: Date | number | undefined };
 
-function Dates({ date }: Props) {
+export function Dates({ date }: Props) {
   function getDate(date: moment.MomentInput) {
     return moment(date).format("L");
   }
@@ -18,5 +18,3 @@ function Dates({ date }: Props) {
     </>
   );
 }
-
-export default Dates;

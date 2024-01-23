@@ -2,7 +2,7 @@ import { useRef, FormEvent, useEffect } from "react";
 import styles from "./CreateNews.module.scss";
 import { IoClose } from "react-icons/io5";
 import { FaPlusCircle } from "react-icons/fa";
-import Dates from "../Dates/Dates";
+import { Dates } from "../Dates/Dates";
 import { v4 as uuid } from "uuid";
 import jarjarImage from "../../assets/images/jarjar.png";
 import { useSidebarContext } from "../../context/SidebarContext";

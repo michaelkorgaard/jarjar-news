@@ -11,7 +11,7 @@ type Props = {
   selectedId: string | undefined;
 };
 
-function CreateComment({ selectedId }: Props) {
+export function CreateComment({ selectedId }: Props) {
   const { news, setNews } = useNewsContext();
 
   const text = useRef<HTMLTextAreaElement>(null);
@@ -59,5 +59,3 @@ function CreateComment({ selectedId }: Props) {
     </>
   );
 }
-
-export default CreateComment;

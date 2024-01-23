@@ -3,7 +3,7 @@ import { IoMdPerson } from "react-icons/io";
 
 type Props = { avatar: string | undefined };
 
-function Avatar({ avatar }: Props) {
+export function Avatar({ avatar }: Props) {
   return (
     <>
       <div className={styles.avatar}>
@@ -12,5 +12,3 @@ function Avatar({ avatar }: Props) {
     </>
   );
 }
-
-export default Avatar;

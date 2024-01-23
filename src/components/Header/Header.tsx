@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import styles from "./Header.module.scss";
-import Menu from "../Menu/Menu";
+import { Menu } from "../Menu/Menu";
 
-function Header() {
+export function Header() {
   return (
     <>
       <header className={styles.header}>
@@ -22,5 +22,3 @@ function Header() {
     </>
   );
 }
-
-export default Header;

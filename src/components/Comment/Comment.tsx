@@ -1,10 +1,10 @@
 import styles from "./Comment.module.scss";
-import Avatar from "../Avatar/Avatar.tsx";
-import Dates from "../Dates/Dates.tsx";
+import { Dates } from "../Dates/Dates.tsx";
 import { CommentType } from "../../types/CommentType.tsx";
-import ActionBar from "../ActionBar/ActionBar.tsx";
+import { Avatar } from "../Avatar/Avatar.tsx";
+import { ActionBar } from "../ActionBar/ActionBar.tsx";
 
-function Comment({
+export function Comment({
   id,
   text,
   createdBy,
@@ -45,5 +45,3 @@ function Comment({
     </>
   );
 }
-
-export default Comment;

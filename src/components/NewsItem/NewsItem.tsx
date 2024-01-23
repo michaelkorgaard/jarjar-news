@@ -1,13 +1,13 @@
 import { useParams } from "react-router-dom";
 import styles from "./Newsitem.module.scss";
-import Comment from "../Comment/Comment.tsx";
-import Avatar from "../Avatar/Avatar.tsx";
-import ActionBar from "../ActionBar/ActionBar.tsx";
-import Dates from "../Dates/Dates.tsx";
+import { Comment } from "../Comment/Comment.tsx";
+import { Avatar } from "../Avatar/Avatar.tsx";
+import { ActionBar } from "../ActionBar/ActionBar.tsx";
+import { Dates } from "../Dates/Dates.tsx";
 import { CommentType } from "../../types/CommentType.tsx";
 import { useNewsContext } from "../../context/NewsContext.tsx";
 
-function NewsItem() {
+export function NewsItem() {
   let { id } = useParams();
   const { news } = useNewsContext();
   const selectedNewsItem = news.find((newsItem) => newsItem.id === id);
@@ -51,5 +51,3 @@ function NewsItem() {
     </>
   );
 }
-
-export default NewsItem;

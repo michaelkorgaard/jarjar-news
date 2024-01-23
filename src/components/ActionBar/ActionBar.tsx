@@ -1,15 +1,15 @@
 import { useState } from "react";
-import ActionButton from "../ActionButton/ActionButton";
+import { ActionButton } from "../ActionButton/ActionButton";
 import styles from "./ActionBar.module.scss";
 import { FaReply } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
-import CreateComment from "../CreateComment/CreateComment";
+import { CreateComment } from "../CreateComment/CreateComment";
 
 type Props = {
   selectedId: string | undefined;
 };
 
-function ActionBar({ selectedId }: Props) {
+export function ActionBar({ selectedId }: Props) {
   const [state, setState] = useState(false);
 
   function toggleReply() {
@@ -35,5 +35,3 @@ function ActionBar({ selectedId }: Props) {
     </>
   );
 }
-
-export default ActionBar;

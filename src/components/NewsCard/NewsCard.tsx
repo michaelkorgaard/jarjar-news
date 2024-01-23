@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./NewsCard.module.scss";
-import Avatar from "../Avatar/Avatar.tsx";
-import Dates from "../Dates/Dates.tsx";
+import { Avatar } from "../Avatar/Avatar.tsx";
+import { Dates } from "../Dates/Dates.tsx";
 import { MdDelete } from "react-icons/md";
 import { NewsType } from "../../types/NewsType.tsx";
 import { useNewsContext } from "../../context/NewsContext";
@@ -10,7 +10,7 @@ type Props = {
   newsItem: NewsType;
 };
 
-function NewsCard({ newsItem }: Props) {
+export function NewsCard({ newsItem }: Props) {
   const { news, setNews } = useNewsContext();
 
   function deleteNewsItem() {
@@ -44,5 +44,3 @@ function NewsCard({ newsItem }: Props) {
     </>
   );
 }
-
-export default NewsCard;

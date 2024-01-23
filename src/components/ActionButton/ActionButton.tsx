@@ -11,7 +11,7 @@ type Props = {
   selectedId: string | undefined;
 };
 
-function ActionButton({ type, selectedId }: Props) {
+export function ActionButton({ type, selectedId }: Props) {
   const { news } = useNewsContext();
   let icon = getIcon(type);
   let [count, setCount] = useState(0);
@@ -67,5 +67,3 @@ function ActionButton({ type, selectedId }: Props) {
     </>
   );
 }
-
-export default ActionButton;
