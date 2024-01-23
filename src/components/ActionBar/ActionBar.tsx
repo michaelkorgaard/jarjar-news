@@ -4,17 +4,12 @@ import styles from "./ActionBar.module.scss";
 import { FaReply } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
 import CreateComment from "../CreateComment/CreateComment";
-import { CommentType } from "../../types/CommentType";
 
 type Props = {
-  newsId: string | undefined;
-  onCreateComment: (
-    updatedList: CommentType,
-    newsId: string | undefined
-  ) => void;
+  selectedId: string | undefined;
 };
 
-function ActionBar({ newsId, onCreateComment }: Props) {
+function ActionBar({ selectedId }: Props) {
   const [state, setState] = useState(false);
 
   function toggleReply() {
@@ -25,18 +20,16 @@ function ActionBar({ newsId, onCreateComment }: Props) {
     <>
       <div className={styles.actionBar}>
         <div className={styles.actionBar__left}>
-          <ActionButton text="Like" />
-          <ActionButton text="Dislike" />
+          <ActionButton type="Like" selectedId={selectedId} />
+          <ActionButton type="Dislike" selectedId={selectedId} />
         </div>
         <div className={styles.actionBar__right}>
           <button className={styles.actionBar__reply} onClick={toggleReply}>
             {!state && <FaReply />}
             {state && <MdCancel />}
-            {state ? "Cancel" : "Reply"}
+            {state ? "" : "Comment"}
           </button>
-          {state && (
-            <CreateComment onCreateComment={onCreateComment} newsId={newsId} />
-          )}
+          {state && <CreateComment selectedId={selectedId} />}
         </div>
       </div>
     </>

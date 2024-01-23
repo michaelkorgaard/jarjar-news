@@ -21,6 +21,8 @@ export let data: NewsType[] = [
     createdBy: "Jar jar",
     createdImage: jarjarImage,
     createdDate: new Date(),
+    likes: 1,
+    dislikes: 9,
     comments: [
       {
         id: uuid(),
@@ -28,6 +30,30 @@ export let data: NewsType[] = [
         createdBy: "C3P0",
         createdImage: c3poImage,
         createdDate: new Date(),
+        likes: 10,
+        dislikes: 5,
+        comments: [
+          {
+            id: uuid(),
+            text: "3. niveau",
+            createdBy: "C3P0",
+            createdImage: c3poImage,
+            createdDate: new Date(),
+            likes: 7,
+            dislikes: 3,
+            comments: [],
+          },
+          {
+            id: uuid(),
+            text: "3 niveau",
+            createdBy: "C3P0",
+            createdImage: c3poImage,
+            createdDate: new Date(),
+            likes: 10,
+            dislikes: 10,
+            comments: [],
+          },
+        ],
       },
       {
         id: uuid(),
@@ -35,6 +61,9 @@ export let data: NewsType[] = [
         createdBy: "C3P0",
         createdImage: c3poImage,
         createdDate: new Date(),
+        likes: 0,
+        dislikes: 0,
+        comments: [],
       },
       {
         id: uuid(),
@@ -42,6 +71,9 @@ export let data: NewsType[] = [
         createdBy: "B1 battle droid",
         createdImage: droidImage,
         createdDate: new Date(),
+        likes: 110,
+        dislikes: 110,
+        comments: [],
       },
     ],
   },
@@ -53,6 +85,9 @@ export let data: NewsType[] = [
     createdBy: "R2-D2",
     createdImage: undefined,
     createdDate: new Date(),
+    likes: 0,
+    dislikes: 0,
+    comments: [],
   },
   {
     id: uuid(),
@@ -62,6 +97,9 @@ export let data: NewsType[] = [
     createdBy: "Jar Jar",
     createdImage: jarjarImage,
     createdDate: new Date(),
+    likes: 0,
+    dislikes: 0,
+    comments: [],
   },
   {
     id: uuid(),
@@ -71,6 +109,9 @@ export let data: NewsType[] = [
     createdBy: "Jar Jar",
     createdImage: jarjarImage,
     createdDate: new Date(),
+    likes: 0,
+    dislikes: 0,
+    comments: [],
   },
   {
     id: uuid(),
@@ -80,5 +121,8 @@ export let data: NewsType[] = [
     createdBy: "Jar Jar",
     createdImage: jarjarImage,
     createdDate: new Date(),
+    likes: 10,
+    dislikes: 10,
+    comments: [],
   },
 ];

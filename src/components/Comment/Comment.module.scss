@@ -3,27 +3,39 @@
   border: 1px solid #eee;
   border-radius: 10px;
   margin-bottom: 12px;
-  padding: 24px;
-  display: flex;
+  padding: 24px 24px 0 24px;
+  // display: flex;
+
+  &__area {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
 
   &__content {
     flex: 1;
     margin-left: 24px;
   }
 
-  &__top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-  }
-
   &__createdBy {
     font-size: 18px;
     font-weight: bold;
+    margin-bottom: 12px;
+  }
+
+  &__createdDate {
+    margin-bottom: 12px;
   }
 
   &__text {
     line-height: 22px;
+    margin-bottom: 12px;
+  }
+
+  &__commentsTitle {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 12px;
   }
 }

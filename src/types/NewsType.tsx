@@ -8,5 +8,7 @@ export type NewsType = {
   createdBy: string;
   createdImage?: string;
   createdDate: Date;
-  comments?: CommentType[];
+  likes: number;
+  dislikes: number;
+  comments: CommentType[];
 };

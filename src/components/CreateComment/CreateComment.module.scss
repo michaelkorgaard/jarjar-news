@@ -1,7 +1,6 @@
 .createComment {
   display: flex;
-  align-items: flex-end;
-  flex-direction: column;
+  align-items: flex-start;
   width: 100%;
   &__textarea {
     width: 100%;
@@ -13,21 +12,24 @@
     outline: none;
     border: 2px solid var(--ui-border);
     resize: vertical;
-    margin-bottom: 24px;
+    margin-left: 24px;
     padding: 10px;
     font-size: 16px;
   }
   &__button {
     border: none;
-    background-color: var(--off-primary);
-    color: white;
-    padding: 10px;
+    color: var(--off-primary);
+    background-color: transparent;
+    padding: 12px;
+    font-size: 14px;
     border-radius: 5px;
     cursor: pointer;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    font-size: 18px;
     svg {
+      font-size: 24px;
       margin-right: 10px;
     }
   }

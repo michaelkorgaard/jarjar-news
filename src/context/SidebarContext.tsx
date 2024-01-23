@@ -5,9 +5,10 @@ export type SidebarContent = {
   setSidebarState: (value: boolean) => void;
 };
 
-export const SidebarContext = createContext<SidebarContent>({
+const SidebarContext = createContext<SidebarContent>({
   sidebarState: false,
   setSidebarState: () => {},
 });
 
+export const SidebarContentProvider = SidebarContext.Provider;
 export const useSidebarContext = () => useContext(SidebarContext);

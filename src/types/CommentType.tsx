@@ -4,4 +4,7 @@ export type CommentType = {
   createdBy: string;
   createdImage: string;
   createdDate: Date;
+  likes: number;
+  dislikes: number;
+  comments: CommentType[];
 };

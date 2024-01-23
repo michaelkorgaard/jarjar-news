@@ -7,36 +7,10 @@ import Dates from "../Dates/Dates.tsx";
 import { CommentType } from "../../types/CommentType.tsx";
 import { useNewsContext } from "../../context/NewsContext.tsx";
 
-type Props = {
-  onCreateComment: (
-    updatedList: CommentType,
-    newsId: string | undefined
-  ) => void;
-};
-
-function NewsItem({ onCreateComment }: Props) {
+function NewsItem() {
   let { id } = useParams();
   const { news } = useNewsContext();
   const selectedNewsItem = news.find((newsItem) => newsItem.id === id);
-
-  // const [selectedNewsItem, setSelectedNewsItem] = useState(
-  //   newsArray.find((newsItem) => newsItem.id === id)
-  // );
-
-  // useEffect(() => {
-  //   const data = window.localStorage.getItem("MY_KEY");
-  //   if (data !== null) {
-  //     setSelectedNewsItem(JSON.parse(data));
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   if (selectedNewsItem !== undefined) {
-  //     window.localStorage.setItem("MY_KEY", JSON.stringify(selectedNewsItem));
-  //   } else {
-  //     window.localStorage.removeItem("MY_KEY");
-  //   }
-  // }, [selectedNewsItem]);
 
   return (
     <>
@@ -65,16 +39,13 @@ function NewsItem({ onCreateComment }: Props) {
         </div>
       </div>
 
-      <ActionBar
-        onCreateComment={onCreateComment}
-        newsId={selectedNewsItem?.id}
-      />
+      <ActionBar selectedId={selectedNewsItem?.id} />
 
       {selectedNewsItem?.comments && (
         <div className={styles.newsItem__comments}>Comments:</div>
       )}
 
-      {selectedNewsItem?.comments?.map((comment: CommentType) => (
+      {selectedNewsItem?.comments.map((comment: CommentType) => (
         <Comment key={comment.id} {...comment} />
       ))}
     </>

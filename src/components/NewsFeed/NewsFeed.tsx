@@ -14,7 +14,6 @@ function NewsFeed() {
           <NewsCard key={newsCard.id} newsItem={newsCard} />
         ))}
       </div>
-      <CreateNews />
     </>
   );
 }
