@@ -7,5 +7,18 @@ body {
 
 .wrapper {
   width: 1200px;
-  margin: 0 auto;
+  margin: 0 auto 24px;
+
+  @media screen and (max-width: 1248px) {
+    width: 100%;
+  }
+}
+
+.css-13cymwt-control {
+  background-color: var(--ui-row) !important;
+  border: none !important;
+}
+
+.css-b62m3t-container {
+  outline: none !important;
 }

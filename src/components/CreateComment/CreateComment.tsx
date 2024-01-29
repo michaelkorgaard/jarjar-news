@@ -9,15 +9,16 @@ import { NewsType } from "../../types/NewsType";
 
 type Props = {
   selectedId: string | undefined;
+  toggleReply: () => void;
 };
 
-export function CreateComment({ selectedId }: Props) {
+export function CreateComment({ selectedId, toggleReply }: Props) {
   const { news, setNews } = useNewsContext();
 
   const text = useRef<HTMLTextAreaElement>(null);
   const createdBy = "Jar jar";
   const createdImage = jarjarImage;
-  const createdDate = new Date();
+  const createdDate = new Date("2030-03-25");
 
   function reply() {
     let comment: CommentType = {
@@ -28,33 +29,34 @@ export function CreateComment({ selectedId }: Props) {
       createdDate: createdDate,
       likes: 0,
       dislikes: 0,
+      hate: 0,
+      love: 0,
       comments: [],
     };
 
     setReply(news, comment);
+    toggleReply();
   }
 
   function setReply(params: NewsType[] | CommentType[], comment: CommentType) {
     params.forEach((item) => {
       if (item.id === selectedId) {
-        item.comments.push(comment);
+        item.comments.unshift(comment);
         const newNewsArray = [...news];
         setNews(newNewsArray);
       }
-      if (item.comments !== undefined) {
-        setReply(item.comments, comment);
-      }
+      setReply(item.comments, comment);
     });
   }
 
   return (
     <>
       <div className={styles.createComment}>
+        <textarea className={styles.createComment__textarea} ref={text} />
         <button className={styles.createComment__button} onClick={reply}>
           <FaReply />
           Reply
         </button>
-        <textarea className={styles.createComment__textarea} ref={text} />
       </div>
     </>
   );

@@ -6,7 +6,7 @@
   width: 400px;
   background-color: #fff;
   overflow: auto;
-
+  z-index: 99;
   transition: 200ms all ease-in-out;
 
   &__open {
@@ -16,8 +16,6 @@
 
   &__inner {
     padding: 24px;
-    position: absolute;
-    inset: 0;
   }
 
   &__top {
@@ -49,6 +47,14 @@
 
   &__date {
     margin-bottom: 24px;
+  }
+
+  &__createdBy {
+    margin-bottom: 24px;
+
+    span {
+      font-weight: bold;
+    }
   }
 
   &__title {

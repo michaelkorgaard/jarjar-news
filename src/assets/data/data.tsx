@@ -1,5 +1,6 @@
 import { v4 as uuid } from "uuid";
 import { NewsType } from "../../types/NewsType";
+import { UserType } from "../../types/UserType";
 
 // Images
 import jarjarImage from "../images/jarjar.png";
@@ -12,6 +13,45 @@ import newsImage3 from "../images/news-image3.jpg";
 import newsImage4 from "../images/news-image4.jpg";
 import newsImage5 from "../images/news-image5.jpg";
 
+export let noUser: UserType = {
+  id: 1,
+  username: "",
+  email: "",
+  role: "",
+  password: "",
+};
+
+export let users: UserType[] = [
+  {
+    id: 1,
+    username: "User 1",
+    email: "test",
+    role: "Admin",
+    password: "Test1",
+  },
+  {
+    id: 2,
+    username: "User 2",
+    email: "test",
+    role: "Admin",
+    password: "Test2",
+  },
+  {
+    id: 3,
+    username: "User 3",
+    email: "test",
+    role: "User",
+    password: "Test3",
+  },
+  {
+    id: 4,
+    username: "User 4",
+    email: "test",
+    role: "User",
+    password: "Test4",
+  },
+];
+
 export let data: NewsType[] = [
   {
     id: uuid(),
@@ -23,6 +63,8 @@ export let data: NewsType[] = [
     createdDate: new Date(),
     likes: 1,
     dislikes: 9,
+    hate: 66,
+    love: 333,
     comments: [
       {
         id: uuid(),
@@ -32,6 +74,8 @@ export let data: NewsType[] = [
         createdDate: new Date(),
         likes: 10,
         dislikes: 5,
+        hate: 66,
+        love: 333,
         comments: [
           {
             id: uuid(),
@@ -41,6 +85,8 @@ export let data: NewsType[] = [
             createdDate: new Date(),
             likes: 7,
             dislikes: 3,
+            hate: 66,
+            love: 333,
             comments: [],
           },
           {
@@ -51,6 +97,8 @@ export let data: NewsType[] = [
             createdDate: new Date(),
             likes: 10,
             dislikes: 10,
+            hate: 66,
+            love: 333,
             comments: [],
           },
         ],
@@ -63,6 +111,8 @@ export let data: NewsType[] = [
         createdDate: new Date(),
         likes: 0,
         dislikes: 0,
+        hate: 66,
+        love: 333,
         comments: [],
       },
       {
@@ -73,6 +123,8 @@ export let data: NewsType[] = [
         createdDate: new Date(),
         likes: 110,
         dislikes: 110,
+        hate: 66,
+        love: 333,
         comments: [],
       },
     ],
@@ -87,6 +139,8 @@ export let data: NewsType[] = [
     createdDate: new Date(),
     likes: 0,
     dislikes: 0,
+    hate: 66,
+    love: 333,
     comments: [],
   },
   {
@@ -99,6 +153,8 @@ export let data: NewsType[] = [
     createdDate: new Date(),
     likes: 0,
     dislikes: 0,
+    hate: 66,
+    love: 333,
     comments: [],
   },
   {
@@ -111,6 +167,8 @@ export let data: NewsType[] = [
     createdDate: new Date(),
     likes: 0,
     dislikes: 0,
+    hate: 66,
+    love: 333,
     comments: [],
   },
   {
@@ -123,6 +181,50 @@ export let data: NewsType[] = [
     createdDate: new Date(),
     likes: 10,
     dislikes: 10,
+    hate: 66,
+    love: 333,
     comments: [],
   },
 ];
+
+// IndexedDB
+// const indexedDB = window.indexedDB;
+// const request = indexedDB.open("UsersDB", 1);
+
+// request.onerror = function (event) {
+//   console.log("error", event);
+// };
+
+// request.onupgradeneeded = function () {
+//   const db = request.result;
+//   const store = db.createObjectStore("users", { keyPath: "id" });
+//   store.createIndex("users_username", ["username"], { unique: true });
+//   store.createIndex("users_role", ["role"], { unique: false });
+//   store.createIndex("users_password", ["password"], { unique: false });
+//   console.log("db", db);
+// };
+
+// request.onsuccess = function () {
+//   console.log("Database opened successfully");
+
+//   const db = request.result;
+//   const transaction = db.transaction("users", "readwrite");
+//   const store = transaction.objectStore("users");
+//   const usernameIndex = store.index("users_username");
+//   const roleIndex = store.index("users_role");
+//   const passwordIndex = store.index("users_password");
+
+//   users.forEach((user) => {
+//     store.put(user);
+//   });
+
+//   const idQuery = store.get(4);
+
+//   idQuery.onsuccess = function () {
+//     console.log("idQuery", idQuery.result);
+//   };
+
+//   transaction.oncomplete = function () {
+//     db.close();
+//   };
+// };

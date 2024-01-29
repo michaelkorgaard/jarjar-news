@@ -8,14 +8,16 @@ import jarjarImage from "../../assets/images/jarjar.png";
 import { useSidebarContext } from "../../context/SidebarContext";
 import { NewsType } from "../../types/NewsType";
 import { useNewsContext } from "../../context/NewsContext";
+import { useUserContext } from "../../context/UserContext";
 
 export function CreateNews() {
-  const { sidebarState: isSidebarOpen, setSidebarState } = useSidebarContext();
+  const { sidebarState, setSidebarState } = useSidebarContext();
+  // const { user } = useUserContext();
 
   const { news, setNews } = useNewsContext();
 
   function toggleCreateNews() {
-    setSidebarState(!isSidebarOpen);
+    setSidebarState(!sidebarState);
   }
 
   const image = "https://placehold.it/2000x1000";
@@ -26,15 +28,13 @@ export function CreateNews() {
   const createdDate = new Date();
 
   useEffect(() => {
-    if (!isSidebarOpen) {
-      return;
+    if (sidebarState) {
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = "unset";
+      };
     }
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [isSidebarOpen]);
+  }, [sidebarState]);
 
   function createNews(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -49,24 +49,26 @@ export function CreateNews() {
       createdDate: createdDate,
       likes: 0,
       dislikes: 0,
+      hate: 0,
+      love: 0,
       comments: [],
     };
 
     const newNewsArray = [...news, newsItem];
     setNews(newNewsArray);
     setSidebarState(false);
-    //event.currentTarget.reset();
+    event.currentTarget.reset();
   }
 
-  if (isSidebarOpen === false) return null;
+  if (sidebarState === false) return null;
 
   return (
     <>
       <form
-        aria-hidden={!isSidebarOpen}
+        aria-hidden={!sidebarState}
         onSubmit={createNews}
         className={`${styles.createNews} ${
-          isSidebarOpen && styles.createNews__open
+          sidebarState && styles.createNews__open
         }`}
       >
         <div className={styles.createNews__inner}>
@@ -82,6 +84,10 @@ export function CreateNews() {
           </div>
           <div className={styles.createNews__date}>
             <Dates date={createdDate} />
+          </div>
+          <div className={styles.createNews__createdBy}>
+            <span>Creator: </span>
+            {/* {user?.username} */}
           </div>
           <div className={styles.createNews__title}>
             <label htmlFor="news_field_title">Title</label>

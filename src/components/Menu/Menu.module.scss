@@ -1,4 +1,7 @@
 .menu {
+  span {
+    display: flex;
+  }
   &__item {
     display: flex;
     align-items: center;
@@ -6,6 +9,7 @@
     transition: 200ms all ease-in-out;
     background-color: transparent;
     border: none;
+    margin-left: 24px;
 
     &:hover {
       color: #333;
@@ -14,10 +18,18 @@
   &__icon {
     margin-right: 12px;
     svg {
-      font-size: 22px;
+      font-size: 20px;
     }
   }
   &__text {
-    font-size: 22px;
+    font-size: 20px;
   }
+}
+
+dialog {
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
 }

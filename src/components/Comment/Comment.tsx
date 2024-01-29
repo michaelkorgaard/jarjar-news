@@ -37,7 +37,7 @@ export function Comment({
             <div className={styles.comment__commentsTitle}>Comments:</div>
           )}
 
-          {comments.map((comment: CommentType) => (
+          {comments.reverse().map((comment: CommentType) => (
             <Comment key={comment.id} {...comment} />
           ))}
         </div>

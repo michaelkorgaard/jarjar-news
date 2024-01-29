@@ -45,7 +45,7 @@ export function NewsItem() {
         <div className={styles.newsItem__comments}>Comments:</div>
       )}
 
-      {selectedNewsItem?.comments.map((comment: CommentType) => (
+      {selectedNewsItem?.comments.reverse().map((comment: CommentType) => (
         <Comment key={comment.id} {...comment} />
       ))}
     </>

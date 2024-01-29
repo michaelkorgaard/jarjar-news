@@ -5,6 +5,7 @@ import { Dates } from "../Dates/Dates.tsx";
 import { MdDelete } from "react-icons/md";
 import { NewsType } from "../../types/NewsType.tsx";
 import { useNewsContext } from "../../context/NewsContext";
+import { useUserContext } from "../../context/UserContext.tsx";
 
 type Props = {
   newsItem: NewsType;
@@ -12,10 +13,12 @@ type Props = {
 
 export function NewsCard({ newsItem }: Props) {
   const { news, setNews } = useNewsContext();
+  const { user } = useUserContext();
 
-  function deleteNewsItem() {
+  function deleteNewsItem(event: any) {
     const newNewsArray = news.filter((elm) => elm.id !== newsItem.id);
     setNews(newNewsArray);
+    event?.preventDefault();
   }
 
   return (
@@ -36,9 +39,14 @@ export function NewsCard({ newsItem }: Props) {
           <div className={styles.newsCard__createdDate}>
             <Dates date={newsItem.createdDate} />
           </div>
-          <button className={styles.newsCard__delete} onClick={deleteNewsItem}>
-            <MdDelete />
-          </button>
+          {user?.username !== "" && (
+            <button
+              className={styles.newsCard__delete}
+              onClick={deleteNewsItem}
+            >
+              <MdDelete />
+            </button>
+          )}
         </div>
       </Link>
     </>

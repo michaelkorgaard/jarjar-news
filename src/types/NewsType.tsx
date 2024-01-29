@@ -2,7 +2,7 @@ import { CommentType } from "./CommentType";
 
 export type NewsType = {
   id: string;
-  image: string;
+  image?: string;
   title?: string;
   text?: string;
   createdBy: string;
@@ -10,5 +10,7 @@ export type NewsType = {
   createdDate: Date;
   likes: number;
   dislikes: number;
+  hate: number;
+  love: number;
   comments: CommentType[];
 };

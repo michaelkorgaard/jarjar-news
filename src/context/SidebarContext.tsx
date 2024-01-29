@@ -10,5 +10,5 @@ const SidebarContext = createContext<SidebarContent>({
   setSidebarState: () => {},
 });
 
-export const SidebarContentProvider = SidebarContext.Provider;
+export const SidebarContextProvider = SidebarContext.Provider;
 export const useSidebarContext = () => useContext(SidebarContext);

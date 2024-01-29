@@ -10,7 +10,6 @@
   cursor: pointer;
   &:hover {
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-
     .news-card__image {
       transform: scale(1.1);
     }
@@ -21,7 +20,8 @@
   }
   &__image {
     height: 100%;
-    object-fit: contain;
+    width: 100%;
+    object-fit: cover;
     transition: 300ms all ease-in-out;
   }
   &__inner {
@@ -72,5 +72,9 @@
     border-bottom-right-radius: 10px;
     padding: 5px;
     font-size: 20px;
+    cursor: pointer;
+  }
+
+  @media screen and (max-width: 1200px) {
   }
 }

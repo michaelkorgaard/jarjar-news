@@ -22,6 +22,8 @@ export function ActionBar({ selectedId }: Props) {
         <div className={styles.actionBar__left}>
           <ActionButton type="Like" selectedId={selectedId} />
           <ActionButton type="Dislike" selectedId={selectedId} />
+          <ActionButton type="Hate" selectedId={selectedId} />
+          <ActionButton type="Love" selectedId={selectedId} />
         </div>
         <div className={styles.actionBar__right}>
           <button className={styles.actionBar__reply} onClick={toggleReply}>
@@ -29,7 +31,9 @@ export function ActionBar({ selectedId }: Props) {
             {state && <MdCancel />}
             {state ? "" : "Comment"}
           </button>
-          {state && <CreateComment selectedId={selectedId} />}
+          {state && (
+            <CreateComment selectedId={selectedId} toggleReply={toggleReply} />
+          )}
         </div>
       </div>
     </>

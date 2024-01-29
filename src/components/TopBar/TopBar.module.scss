@@ -1,0 +1,65 @@
+.topbar {
+  background-color: var(--ui-row);
+  height: 30px;
+  position: relative;
+  z-index: 9;
+  border-bottom: 1px solid var(--ui-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+
+  &__inner {
+    width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  &__user {
+    position: relative;
+    font-size: 14px;
+    margin-right: 24px;
+    &:before {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: var(--accept);
+      left: -20px;
+      top: 2px;
+    }
+  }
+
+  &__role {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    margin-right: 12px;
+    svg {
+      margin-right: 8px;
+    }
+  }
+
+  &__logout {
+    border: none;
+    background-color: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-family: monospace;
+    font-size: 14px;
+    color: var(--ui-text);
+
+    svg {
+      margin-right: 8px;
+    }
+  }
+}
