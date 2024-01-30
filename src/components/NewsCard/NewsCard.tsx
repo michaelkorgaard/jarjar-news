@@ -13,7 +13,7 @@ type Props = {
 
 export function NewsCard({ newsItem }: Props) {
   const { news, setNews } = useNewsContext();
-  const { user } = useUserContext();
+  const { currentUser } = useUserContext();
 
   function deleteNewsItem(event: any) {
     const newNewsArray = news.filter((elm) => elm.id !== newsItem.id);
@@ -32,18 +32,13 @@ export function NewsCard({ newsItem }: Props) {
           <div className={styles.newsCard__text}>{newsItem.text}</div>
           <div className={styles.newsCard__created}>
             <Avatar avatar={newsItem.createdImage} />
-            <div className={styles.newsCard__createdBy}>
-              {newsItem.createdBy}
-            </div>
+            <div className={styles.newsCard__createdBy}>{newsItem.createdBy}</div>
           </div>
           <div className={styles.newsCard__createdDate}>
             <Dates date={newsItem.createdDate} />
           </div>
-          {user?.username !== "" && (
-            <button
-              className={styles.newsCard__delete}
-              onClick={deleteNewsItem}
-            >
+          {currentUser && currentUser.role === "admin" && (
+            <button className={styles.newsCard__delete} onClick={deleteNewsItem}>
               <MdDelete />
             </button>
           )}

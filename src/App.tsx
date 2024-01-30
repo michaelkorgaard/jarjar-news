@@ -20,7 +20,7 @@ export function App() {
   const [sidebarState, setSidebarState] = useState<boolean>(false);
   const [news, setNews] = useState(data);
   const [currentUser, setCurrentUser] = useState<UserType | null>(null);
-  const [allUsers, setAllUsers] = useState<UserType[] | null>(users);
+  const [allUsers, setAllUsers] = useState<UserType[]>(users);
 
   useEffect(() => {
     db.news.bulkAdd(news);

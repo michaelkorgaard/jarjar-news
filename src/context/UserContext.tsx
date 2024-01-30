@@ -3,14 +3,14 @@ import { UserType } from "../types/UserType";
 
 type UserContextType = {
   currentUser: UserType | null;
-  allUsers: UserType[] | null;
+  allUsers: UserType[];
   setCurrentUser: (user: UserType | null) => void;
-  setAllUsers: (user: UserType[] | null) => void;
+  setAllUsers: (user: UserType[]) => void;
 };
 
 export const UserContext = createContext<UserContextType>({
   currentUser: null,
-  allUsers: null,
+  allUsers: [],
   setCurrentUser: () => {},
   setAllUsers: () => {},
 });

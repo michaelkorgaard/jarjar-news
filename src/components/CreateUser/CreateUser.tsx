@@ -1,24 +1,29 @@
 import styles from "./CreateUser.module.scss";
 import { FormEvent, useRef, useState } from "react";
-import { MdErrorOutline } from "react-icons/md";
 import { IoClose } from "react-icons/io5";
-import Select from "react-select";
+import Select, { ActionMeta } from "react-select";
+import { UserType } from "../../types/UserType";
+import { useUserContext } from "../../context/UserContext";
+import { v4 as uuid } from "uuid";
+import { FormError } from "../FormError/FormError";
 
-type option = {
+type Role = {
   value: string;
   label: string;
 };
 
-const options: option[] = [
+const options: Role[] = [
   { value: "user", label: "User" },
   { value: "admin", label: "Admin" },
 ];
 
-type props = { toggleCreateUserDialog: () => void };
+type Props = { toggleCreateUserDialog: () => void };
 
-export function CreateUser({ toggleCreateUserDialog }: props) {
+export function CreateUser({ toggleCreateUserDialog }: Props) {
+  const { allUsers, setAllUsers } = useUserContext();
   const [error, setError] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedRole, setSelectedRole] = useState<Role | null>(options[0]);
+  const errorMessage = "Please fill out all fields";
 
   let formRef = useRef<HTMLFormElement>(null);
   let usernameRef = useRef<HTMLInputElement>(null);
@@ -26,16 +31,40 @@ export function CreateUser({ toggleCreateUserDialog }: props) {
   let passwordRef = useRef<HTMLInputElement>(null);
   let repeatPasswordRef = useRef<HTMLInputElement>(null);
 
-  function handlecreateUser(event: FormEvent<HTMLFormElement>) {
+  function handleRoleChange(newValue: Role | null, _actionMeta: ActionMeta<Role>) {
+    if (newValue) {
+      setSelectedRole(newValue);
+    }
+  }
+
+  function handleCreateUser(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (usernameRef.current?.value && passwordRef.current?.value) {
-      event.currentTarget.reset();
+
+    const form = formRef.current;
+    const username = usernameRef.current?.value;
+    const email = emailRef.current?.value;
+    const role = selectedRole?.value;
+    const password = passwordRef.current?.value;
+    const repeatPassword = repeatPasswordRef.current?.value;
+
+    if (username && email && role && password && repeatPassword === password) {
+      let user: UserType = {
+        id: uuid(),
+        username: username,
+        email: email,
+        role: role,
+        password: password,
+      };
+
+      const newUserArray = [...allUsers, user];
+      setAllUsers(newUserArray);
+
+      form?.reset();
       setError(false);
       toggleCreateUserDialog();
     } else {
       setError(true);
     }
-    formRef.current?.reset();
   }
 
   return (
@@ -45,70 +74,32 @@ export function CreateUser({ toggleCreateUserDialog }: props) {
           <div className={styles.createUser__title}>JarJar News</div>
         </div>
         <div className={styles.createUser__right}>
-          <button
-            type="button"
-            className={styles.createUser__close}
-            onClick={toggleCreateUserDialog}
-          >
+          <button type="button" className={styles.createUser__close} onClick={toggleCreateUserDialog}>
             <IoClose />
           </button>
-          <form
-            method="dialog"
-            onSubmit={handlecreateUser}
-            ref={formRef}
-            autoComplete="off"
-          >
+          <form method="dialog" onSubmit={handleCreateUser} ref={formRef} autoComplete="off">
             <div className={styles.createUser__header}>Create user</div>
             <div className={styles.createUser__input}>
               <label htmlFor="username">Username:</label>
-              <input
-                type="text"
-                id="username"
-                autoComplete="false"
-                ref={usernameRef}
-              />
+              <input type="text" id="username" autoComplete="false" ref={usernameRef} />
             </div>
             <div className={styles.createUser__input}>
               <label htmlFor="email">Email:</label>
-              <input
-                type="email"
-                id="email"
-                autoComplete="false"
-                ref={emailRef}
-              />
+              <input type="email" id="email" autoComplete="false" ref={emailRef} />
             </div>
             <div className={styles.createUser__input}>
               <label htmlFor="role">Role:</label>
-              <Select
-                defaultValue={options[0]}
-                // onChange={setSelectedOption}
-                options={options}
-              />
+              <Select defaultValue={options[0]} onChange={handleRoleChange} options={options} />
             </div>
             <div className={styles.createUser__input}>
               <label htmlFor="password">Password:</label>
-              <input
-                type="password"
-                id="password"
-                autoComplete="false"
-                ref={passwordRef}
-              />
+              <input type="password" id="password" autoComplete="false" ref={passwordRef} />
             </div>
             <div className={styles.createUser__input}>
               <label htmlFor="repeatPassword">Repeat password:</label>
-              <input
-                type="password"
-                id="repeatPassword"
-                autoComplete="false"
-                ref={repeatPasswordRef}
-              />
+              <input type="password" id="repeatPassword" autoComplete="false" ref={repeatPasswordRef} />
             </div>
-            {error && (
-              <div className={styles.createUser__error}>
-                <MdErrorOutline />
-                <span>Username or password is incorrect</span>
-              </div>
-            )}
+            {error && <FormError errorMessage={errorMessage} />}
             <button type="submit" className={styles.createUser__button}>
               Create user
             </button>

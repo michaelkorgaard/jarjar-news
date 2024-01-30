@@ -87,21 +87,6 @@
     }
   }
 
-  &__error {
-    border: 2px solid var(--error);
-    color: var(--error);
-    background-color: #ff000012;
-    padding: 10px;
-    margin-bottom: 24px;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    svg {
-      font-size: 30px;
-      margin-right: 12px;
-    }
-  }
-
   &__button {
     width: 100%;
     background-color: #24c9c9;
