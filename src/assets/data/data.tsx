@@ -13,42 +13,34 @@ import newsImage3 from "../images/news-image3.jpg";
 import newsImage4 from "../images/news-image4.jpg";
 import newsImage5 from "../images/news-image5.jpg";
 
-export let noUser: UserType = {
-  id: 1,
-  username: "",
-  email: "",
-  role: "",
-  password: "",
-};
-
 export let users: UserType[] = [
   {
     id: 1,
-    username: "User 1",
-    email: "test",
-    role: "Admin",
-    password: "Test1",
+    username: "henrik",
+    email: "user1@mail.com",
+    role: "admin",
+    password: "test",
   },
   {
     id: 2,
-    username: "User 2",
-    email: "test",
-    role: "Admin",
-    password: "Test2",
+    username: "ole",
+    email: "user2@mail.com",
+    role: "admin",
+    password: "test",
   },
   {
     id: 3,
-    username: "User 3",
-    email: "test",
-    role: "User",
-    password: "Test3",
+    username: "masterhacker69",
+    email: "user3@mail.com",
+    role: "user",
+    password: "test",
   },
   {
     id: 4,
-    username: "User 4",
-    email: "test",
-    role: "User",
-    password: "Test4",
+    username: "tester",
+    email: "user4@mail.com",
+    role: "user",
+    password: "test",
   },
 ];
 

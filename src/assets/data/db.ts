@@ -1,59 +1,22 @@
-let request: IDBOpenDBRequest;
-let db: IDBDatabase;
-let version = 1;
+import Dexie from "dexie";
+import { NewsType } from "../../types/NewsType";
+import { UserType } from "../../types/UserType";
 
-export enum Stores {
-  Users = "users",
+class MyAppDatabase extends Dexie {
+  news: Dexie.Table<NewsType, string>;
+  users: Dexie.Table<UserType, number>;
+
+  constructor() {
+    super("Database");
+    this.version(1).stores({
+      news: "id, image, title, text, createdBy, createdImage, createdDate, likes, dislikes, hate, love",
+      users: "++id, username, email, role, password",
+    });
+    this.news = this.table("news");
+    this.users = this.table("users");
+  }
 }
 
-export const initDB = (): Promise<boolean> => {
-  return new Promise((resolve) => {
-    request = indexedDB.open("usersDB");
+const db = new MyAppDatabase();
 
-    request.onupgradeneeded = () => {
-      db = request.result;
-      if (!db.objectStoreNames.contains(Stores.Users)) {
-        console.log("Creating users store");
-        db.createObjectStore(Stores.Users, { keyPath: "id" });
-      }
-    };
-
-    request.onsuccess = () => {
-      db = request.result;
-      version = db.version;
-      console.log("request.onsuccess - initDB", version);
-      resolve(true);
-    };
-
-    request.onerror = () => {
-      resolve(false);
-    };
-  });
-};
-
-export const addData = <T>(
-  storeName: string,
-  data: T
-): Promise<T | string | null> => {
-  return new Promise((resolve) => {
-    request = indexedDB.open("usersDB", version);
-
-    request.onsuccess = () => {
-      console.log("request.onsuccess - addData", data);
-      db = request.result;
-      const tx = db.transaction(storeName, "readwrite");
-      const store = tx.objectStore(storeName);
-      store.add(data);
-      resolve(data);
-    };
-
-    request.onerror = () => {
-      const error = request.error?.message;
-      if (error) {
-        resolve(error);
-      } else {
-        resolve("Unknown error");
-      }
-    };
-  });
-};
+export default db;

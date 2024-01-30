@@ -26,6 +26,7 @@
     position: relative;
     font-size: 14px;
     margin-right: 24px;
+    text-transform: capitalize;
     &:before {
       content: "";
       position: absolute;
@@ -38,11 +39,22 @@
     }
   }
 
+  &__mail {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    margin-right: 24px;
+    svg {
+      margin-right: 8px;
+    }
+  }
+
   &__role {
     font-size: 14px;
     display: flex;
     align-items: center;
     margin-right: 12px;
+    text-transform: capitalize;
     svg {
       margin-right: 8px;
     }

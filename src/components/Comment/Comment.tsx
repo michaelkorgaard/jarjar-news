@@ -4,14 +4,7 @@ import { CommentType } from "../../types/CommentType.tsx";
 import { Avatar } from "../Avatar/Avatar.tsx";
 import { ActionBar } from "../ActionBar/ActionBar.tsx";
 
-export function Comment({
-  id,
-  text,
-  createdBy,
-  createdImage,
-  createdDate,
-  comments,
-}: CommentType) {
+export function Comment({ id, text, createdBy, createdImage, createdDate, comments }: CommentType) {
   return (
     <>
       <div className={styles.comment}>
@@ -33,9 +26,7 @@ export function Comment({
         <div className={styles.comment__comments}>
           <ActionBar selectedId={id} />
 
-          {comments.length > 0 && (
-            <div className={styles.comment__commentsTitle}>Comments:</div>
-          )}
+          {comments.length > 0 && <div className={styles.comment__commentsTitle}>Comments:</div>}
 
           {comments.reverse().map((comment: CommentType) => (
             <Comment key={comment.id} {...comment} />

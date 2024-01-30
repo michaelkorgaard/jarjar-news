@@ -6,9 +6,7 @@ type Props = { avatar: string | undefined };
 export function Avatar({ avatar }: Props) {
   return (
     <>
-      <div className={styles.avatar}>
-        {avatar ? <img src={avatar} /> : <IoMdPerson />}
-      </div>
+      <div className={styles.avatar}>{avatar ? <img src={avatar} /> : <IoMdPerson />}</div>
     </>
   );
 }

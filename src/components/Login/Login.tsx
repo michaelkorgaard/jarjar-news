@@ -1,14 +1,13 @@
 import { useUserContext } from "../../context/UserContext";
-import { UserType } from "../../types/UserType";
 import styles from "./Login.module.scss";
 import { FormEvent, useRef, useState } from "react";
 import { MdErrorOutline } from "react-icons/md";
 import { IoClose } from "react-icons/io5";
 
-type props = { toggleLoginDialog: () => void };
+type Props = { toggleLoginDialog: () => void };
 
-export function Login({ toggleLoginDialog }: props) {
-  // const { setUser } = useUserContext();
+export function Login({ toggleLoginDialog }: Props) {
+  const { setCurrentUser, allUsers } = useUserContext();
   const [error, setError] = useState(false);
 
   let formRef = useRef<HTMLFormElement>(null);
@@ -17,22 +16,23 @@ export function Login({ toggleLoginDialog }: props) {
 
   function handleLogin(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (usernameRef.current?.value && passwordRef.current?.value) {
-      let user: UserType = {
-        id: 1,
-        username: usernameRef.current?.value,
-        email: "",
-        role: "admin",
-        password: passwordRef.current?.value,
-      };
-      const newUser = user;
-      // setUser(newUser);
-      event.currentTarget.reset();
-      setError(false);
-      toggleLoginDialog();
+
+    const username = usernameRef.current?.value;
+    const password = passwordRef.current?.value;
+
+    if (username && password && allUsers) {
+      const user = allUsers.find((user) => user.username === username && user.password === password);
+      if (user) {
+        setCurrentUser(user);
+        setError(false);
+        toggleLoginDialog();
+      } else {
+        setError(true);
+      }
     } else {
       setError(true);
     }
+
     formRef.current?.reset();
   }
 
@@ -43,37 +43,18 @@ export function Login({ toggleLoginDialog }: props) {
           <div className={styles.login__title}>JarJar News</div>
         </div>
         <div className={styles.login__right}>
-          <button
-            type="button"
-            className={styles.login__close}
-            onClick={toggleLoginDialog}
-          >
+          <button type="button" className={styles.login__close} onClick={toggleLoginDialog}>
             <IoClose />
           </button>
-          <form
-            method="dialog"
-            onSubmit={handleLogin}
-            ref={formRef}
-            autoComplete="off"
-          >
+          <form method="dialog" onSubmit={handleLogin} ref={formRef} autoComplete="off">
             <div className={styles.login__header}>Login</div>
             <div className={styles.login__input}>
               <label htmlFor="username">Username:</label>
-              <input
-                type="text"
-                id="username"
-                autoComplete="false"
-                ref={usernameRef}
-              />
+              <input type="text" id="username" autoComplete="false" ref={usernameRef} />
             </div>
             <div className={styles.login__input}>
               <label htmlFor="password">Password:</label>
-              <input
-                type="password"
-                id="password"
-                autoComplete="false"
-                ref={passwordRef}
-              />
+              <input type="password" id="password" autoComplete="false" ref={passwordRef} />
             </div>
             {error && (
               <div className={styles.login__error}>

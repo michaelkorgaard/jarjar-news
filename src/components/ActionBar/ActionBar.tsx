@@ -10,10 +10,10 @@ type Props = {
 };
 
 export function ActionBar({ selectedId }: Props) {
-  const [state, setState] = useState(false);
+  const [replyActivated, setReplyActivated] = useState(false);
 
   function toggleReply() {
-    setState(!state);
+    setReplyActivated(!replyActivated);
   }
 
   return (
@@ -27,13 +27,17 @@ export function ActionBar({ selectedId }: Props) {
         </div>
         <div className={styles.actionBar__right}>
           <button className={styles.actionBar__reply} onClick={toggleReply}>
-            {!state && <FaReply />}
-            {state && <MdCancel />}
-            {state ? "" : "Comment"}
+            {!replyActivated ? (
+              <span>
+                <FaReply /> Comment
+              </span>
+            ) : (
+              <span>
+                <MdCancel />
+              </span>
+            )}
           </button>
-          {state && (
-            <CreateComment selectedId={selectedId} toggleReply={toggleReply} />
-          )}
+          {replyActivated && <CreateComment selectedId={selectedId} toggleReply={toggleReply} />}
         </div>
       </div>
     </>

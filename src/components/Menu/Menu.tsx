@@ -8,10 +8,11 @@ import { useRef } from "react";
 import { Login } from "../Login/Login";
 import { CreateUser } from "../CreateUser/CreateUser";
 import { FaUserPlus } from "react-icons/fa";
+import { FaUserEdit } from "react-icons/fa";
 
 export function Menu() {
   const { sidebarState, setSidebarState } = useSidebarContext();
-  const { user } = useUserContext();
+  const { currentUser } = useUserContext();
 
   const dialogRefCreateUser = useRef<HTMLDialogElement>(null);
   const dialogRefLogin = useRef<HTMLDialogElement>(null);
@@ -21,7 +22,6 @@ export function Menu() {
   }
 
   function toggleCreateUserDialog() {
-    console.log("asdad");
     if (dialogRefCreateUser.current?.open) {
       dialogRefCreateUser.current?.close();
     } else {
@@ -30,7 +30,6 @@ export function Menu() {
   }
 
   function toggleLoginDialog() {
-    console.log("asdad");
     if (dialogRefLogin.current?.open) {
       dialogRefLogin.current?.close();
     } else {
@@ -41,19 +40,28 @@ export function Menu() {
   return (
     <>
       <div className={styles.menu}>
-        {user?.role === "admin" ? (
-          <button className={styles.menu__item} onClick={updateValue}>
-            <div className={styles.menu__icon}>
-              <FaCirclePlus />
-            </div>
-            <div className={styles.menu__text}>News</div>
-          </button>
+        {currentUser ? (
+          <span>
+            {currentUser.role === "admin" && (
+              <button className={styles.menu__item} onClick={updateValue}>
+                <span>
+                  <div className={styles.menu__icon}>
+                    <FaCirclePlus />
+                  </div>
+                  <div className={styles.menu__text}>News</div>
+                </span>
+              </button>
+            )}
+            <button className={styles.menu__item}>
+              <div className={styles.menu__icon}>
+                <FaUserEdit />
+              </div>
+              <div className={styles.menu__text}> Edit account</div>
+            </button>
+          </span>
         ) : (
           <span>
-            <button
-              className={styles.menu__item}
-              onClick={toggleCreateUserDialog}
-            >
+            <button className={styles.menu__item} onClick={toggleCreateUserDialog}>
               <div className={styles.menu__icon}>
                 <FaUserPlus />
               </div>

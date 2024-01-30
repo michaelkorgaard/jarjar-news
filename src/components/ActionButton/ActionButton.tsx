@@ -20,9 +20,7 @@ export function ActionButton({ type, selectedId }: Props) {
   let icon = <AiFillLike />;
   let propertyName = "likes";
 
-  const filterData = (
-    news: (NewsType | CommentType)[]
-  ): NewsType | CommentType | undefined => {
+  const filterData = (news: (NewsType | CommentType)[]): NewsType | CommentType | undefined => {
     for (const newsItem of news) {
       if (newsItem.id === selectedId) {
         return newsItem;

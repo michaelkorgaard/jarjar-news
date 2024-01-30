@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import styles from "./Newsitem.module.scss";
 import { Comment } from "../Comment/Comment.tsx";
 import { Avatar } from "../Avatar/Avatar.tsx";
@@ -14,40 +14,42 @@ export function NewsItem() {
 
   return (
     <>
-      <div className={styles.newsItem}>
-        <img className={styles.newsItem__img} src={selectedNewsItem?.image} />
-        <div className={styles.newsItem__inner}>
-          <div className={styles.newsItem__top}>
-            <div>
-              <div className={styles.newsItem__createdDate}>
-                <Dates date={selectedNewsItem?.createdDate} />
-              </div>
-              <div className={styles.newsItem__title}>
-                {selectedNewsItem?.title}
-              </div>
-            </div>
-            <div>
-              <div className={styles.newsItem__created}>
-                <div className={styles.newsItem__createdBy}>
-                  {selectedNewsItem?.createdBy}
+      {selectedNewsItem ? (
+        <article>
+          <div className={styles.newsItem}>
+            <img className={styles.newsItem__img} src={selectedNewsItem.image} />
+            <div className={styles.newsItem__inner}>
+              <div className={styles.newsItem__top}>
+                <div>
+                  <div className={styles.newsItem__createdDate}>
+                    <Dates date={selectedNewsItem.createdDate} />
+                  </div>
+                  <div className={styles.newsItem__title}>{selectedNewsItem.title}</div>
                 </div>
-                <Avatar avatar={selectedNewsItem?.createdImage} />
+                <div>
+                  <div className={styles.newsItem__created}>
+                    <div className={styles.newsItem__createdBy}>{selectedNewsItem.createdBy}</div>
+                    <Avatar avatar={selectedNewsItem.createdImage} />
+                  </div>
+                </div>
               </div>
+              <div className={styles.newsItem__text}>{selectedNewsItem.text}</div>
             </div>
           </div>
-          <div className={styles.newsItem__text}>{selectedNewsItem?.text}</div>
+
+          <ActionBar selectedId={selectedNewsItem.id} />
+
+          {selectedNewsItem.comments && <div className={styles.newsItem__comments}>Comments:</div>}
+
+          {selectedNewsItem.comments.reverse().map((comment: CommentType) => (
+            <Comment key={comment.id} {...comment} />
+          ))}
+        </article>
+      ) : (
+        <div className={styles.newsItem__nothingSelected}>
+          No news has been selected <Link to="/">Go back</Link>
         </div>
-      </div>
-
-      <ActionBar selectedId={selectedNewsItem?.id} />
-
-      {selectedNewsItem?.comments && (
-        <div className={styles.newsItem__comments}>Comments:</div>
       )}
-
-      {selectedNewsItem?.comments.reverse().map((comment: CommentType) => (
-        <Comment key={comment.id} {...comment} />
-      ))}
     </>
   );
 }
