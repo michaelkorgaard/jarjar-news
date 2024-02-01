@@ -1,9 +1,9 @@
 import { useUserContext } from "../../context/UserContext";
 import styles from "./Login.module.scss";
 import { FormEvent, useRef, useState } from "react";
-import { MdErrorOutline } from "react-icons/md";
 import { IoClose } from "react-icons/io5";
 import { FormError } from "../FormError/FormError";
+import db from "../../assets/data/db";
 
 type Props = { toggleLoginDialog: () => void };
 
@@ -16,7 +16,7 @@ export function Login({ toggleLoginDialog }: Props) {
   let usernameRef = useRef<HTMLInputElement>(null);
   let passwordRef = useRef<HTMLInputElement>(null);
 
-  function handleLogin(event: FormEvent<HTMLFormElement>) {
+  async function handleLogin(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const username = usernameRef.current?.value;
@@ -25,7 +25,8 @@ export function Login({ toggleLoginDialog }: Props) {
     if (username && password && allUsers) {
       const user = allUsers.find((user) => user.username === username && user.password === password);
       if (user) {
-        setCurrentUser(user);
+        await setCurrentUser(user); // Set the current user in React context
+        await db.currentUser.put(user); // Save the current user in IndexedDB
         setError(false);
         toggleLoginDialog();
       } else {

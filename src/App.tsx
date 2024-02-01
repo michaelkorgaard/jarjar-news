@@ -23,9 +23,30 @@ export function App() {
   const [allUsers, setAllUsers] = useState<UserType[]>(users);
 
   useEffect(() => {
-    db.news.bulkAdd(news);
-    db.users.bulkAdd(users);
+    const seedDatabase = async () => {
+      const existingNewsCount = await db.news.count();
+      const existingUsersCount = await db.users.count();
+      const existingCurrentUsersCount = await db.currentUser.count();
+
+      if (existingNewsCount === 0 && existingUsersCount === 0 && existingCurrentUsersCount === 0) {
+        db.news.bulkAdd(data);
+        db.users.bulkAdd(users);
+        if (currentUser !== null) {
+          db.currentUser.put(currentUser);
+        }
+      } else {
+        const existingNews = await db.news.toArray();
+        const existingUsers = await db.users.toArray();
+        const existingCurrentUser = await db.currentUser.toArray();
+        setNews(existingNews);
+        setAllUsers(existingUsers);
+        setCurrentUser(existingCurrentUser[0]);
+      }
+    };
+
+    seedDatabase();
   }, []);
+
   return (
     <>
       <UserContext.Provider value={{ currentUser, allUsers, setCurrentUser, setAllUsers }}>

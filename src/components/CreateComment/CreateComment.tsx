@@ -1,11 +1,11 @@
 import { useRef } from "react";
 import styles from "./CreateComment.module.scss";
 import { FaReply } from "react-icons/fa";
-import jarjarImage from "../../assets/images/jarjar.png";
 import { v4 as uuid } from "uuid";
 import { CommentType } from "../../types/CommentType";
 import { useNewsContext } from "../../context/NewsContext";
 import { NewsType } from "../../types/NewsType";
+import { useUserContext } from "../../context/UserContext";
 
 type Props = {
   selectedId: string | undefined;
@@ -14,11 +14,14 @@ type Props = {
 
 export function CreateComment({ selectedId, toggleReply }: Props) {
   const { news, setNews } = useNewsContext();
+  const { currentUser } = useUserContext();
+
+  if (currentUser === null) return null;
 
   const text = useRef<HTMLTextAreaElement>(null);
-  const createdBy = "Jar jar";
-  const createdImage = jarjarImage;
-  const createdDate = new Date("2030-03-25");
+  const createdBy = currentUser.username;
+  const createdImage = currentUser.image;
+  const createdDate = new Date();
 
   function reply() {
     let comment: CommentType = {
@@ -34,18 +37,28 @@ export function CreateComment({ selectedId, toggleReply }: Props) {
       comments: [],
     };
 
-    setReply(news, comment);
+    setNews(updateNewsArray(news, selectedId, comment));
     toggleReply();
   }
 
-  function setReply(params: NewsType[] | CommentType[], comment: CommentType) {
-    params.forEach((item) => {
+  function updateNewsArray(
+    items: (NewsType | CommentType)[],
+    selectedId: string | undefined,
+    comment?: CommentType
+  ): (NewsType | CommentType)[] {
+    return items.map((item) => {
       if (item.id === selectedId) {
-        item.comments.unshift(comment);
-        const newNewsArray = [...news];
-        setNews(newNewsArray);
+        return {
+          ...item,
+          comments: comment ? [comment, ...item.comments] : [...item.comments],
+        };
+      } else if (item.comments.length > 0) {
+        return {
+          ...item,
+          comments: updateNewsArray(item.comments, selectedId, comment),
+        };
       }
-      setReply(item.comments, comment);
+      return item;
     });
   }
 

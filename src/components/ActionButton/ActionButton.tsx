@@ -7,6 +7,7 @@ import { ImAngry2 } from "react-icons/im";
 import { FaHeart } from "react-icons/fa";
 import { NewsType } from "../../types/NewsType";
 import { CommentType } from "../../types/CommentType";
+import { useUserContext } from "../../context/UserContext";
 
 type Props = {
   type: string;
@@ -14,6 +15,7 @@ type Props = {
 };
 
 export function ActionButton({ type, selectedId }: Props) {
+  const { currentUser } = useUserContext();
   const { news, setNews } = useNewsContext();
   let [upvoted, setUpvoted] = useState(false);
   let count = 0;
@@ -64,13 +66,15 @@ export function ActionButton({ type, selectedId }: Props) {
   }
 
   function vote() {
-    if (selectedItem) {
-      if (!upvoted) {
-        setVote(selectedItem, count + 1);
-        setUpvoted(true);
-      } else {
-        setVote(selectedItem, count - 1);
-        setUpvoted(false);
+    if (currentUser) {
+      if (selectedItem) {
+        if (!upvoted) {
+          setVote(selectedItem, count + 1);
+          setUpvoted(true);
+        } else {
+          setVote(selectedItem, count - 1);
+          setUpvoted(false);
+        }
       }
     }
   }

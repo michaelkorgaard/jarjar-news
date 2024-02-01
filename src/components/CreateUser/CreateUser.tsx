@@ -6,6 +6,7 @@ import { UserType } from "../../types/UserType";
 import { useUserContext } from "../../context/UserContext";
 import { v4 as uuid } from "uuid";
 import { FormError } from "../FormError/FormError";
+import db from "../../assets/data/db";
 
 type Role = {
   value: string;
@@ -25,19 +26,20 @@ export function CreateUser({ toggleCreateUserDialog }: Props) {
   const [selectedRole, setSelectedRole] = useState<Role | null>(options[0]);
   const errorMessage = "Please fill out all fields";
 
-  let formRef = useRef<HTMLFormElement>(null);
-  let usernameRef = useRef<HTMLInputElement>(null);
-  let emailRef = useRef<HTMLInputElement>(null);
-  let passwordRef = useRef<HTMLInputElement>(null);
-  let repeatPasswordRef = useRef<HTMLInputElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+  const usernameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const repeatPasswordRef = useRef<HTMLInputElement>(null);
+  const imageRef = useRef<HTMLInputElement>(null);
 
-  function handleRoleChange(newValue: Role | null, _actionMeta: ActionMeta<Role>) {
+  function handleRoleChange(newValue: Role | null) {
     if (newValue) {
       setSelectedRole(newValue);
     }
   }
 
-  function handleCreateUser(event: FormEvent<HTMLFormElement>) {
+  async function handleCreateUser(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const form = formRef.current;
@@ -46,18 +48,22 @@ export function CreateUser({ toggleCreateUserDialog }: Props) {
     const role = selectedRole?.value;
     const password = passwordRef.current?.value;
     const repeatPassword = repeatPasswordRef.current?.value;
+    const image = imageRef.current?.value;
 
-    if (username && email && role && password && repeatPassword === password) {
+    if (username && email && role && password && repeatPassword === password && image) {
       let user: UserType = {
         id: uuid(),
         username: username,
         email: email,
         role: role,
         password: password,
+        image: image,
       };
 
       const newUserArray = [...allUsers, user];
       setAllUsers(newUserArray);
+
+      await db.users.add(user);
 
       form?.reset();
       setError(false);
@@ -98,6 +104,10 @@ export function CreateUser({ toggleCreateUserDialog }: Props) {
             <div className={styles.createUser__input}>
               <label htmlFor="repeatPassword">Repeat password:</label>
               <input type="password" id="repeatPassword" autoComplete="false" ref={repeatPasswordRef} />
+            </div>
+            <div className={styles.createUser__input}>
+              <label htmlFor="image">Image:</label>
+              <input type="text" id="image" autoComplete="false" ref={imageRef} />
             </div>
             {error && <FormError errorMessage={errorMessage} />}
             <button type="submit" className={styles.createUser__button}>

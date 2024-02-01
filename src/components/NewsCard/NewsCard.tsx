@@ -6,6 +6,7 @@ import { MdDelete } from "react-icons/md";
 import { NewsType } from "../../types/NewsType.tsx";
 import { useNewsContext } from "../../context/NewsContext";
 import { useUserContext } from "../../context/UserContext.tsx";
+import db from "../../assets/data/db.ts";
 
 type Props = {
   newsItem: NewsType;
@@ -15,11 +16,14 @@ export function NewsCard({ newsItem }: Props) {
   const { news, setNews } = useNewsContext();
   const { currentUser } = useUserContext();
 
-  function deleteNewsItem(event: any) {
+  const deleteNewsItem = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
     const newNewsArray = news.filter((elm) => elm.id !== newsItem.id);
     setNews(newNewsArray);
-    event?.preventDefault();
-  }
+
+    await db.news.delete(newsItem.id);
+  };
 
   return (
     <>
